@@ -52,3 +52,38 @@ jobs:
 
     - name: Helm chart Push
       run: helm chart push bcglabacr01.azurecr.io/navid:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_push_image 
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Kubernetes set context
+      uses: Azure/k8s-set-context@v1
+      with:
+        kubeconfig: ${{secrets.KUBECONFIG}} # Grab the auth token from GitHub secrets
+      id: login
+
+    - name: Helm tool installer
+      uses: Azure/setup-helm@v1
+      with:
+        # Version of helm
+        version: 3.3.1
+
+    - name: Login to ACR using HELM
+      run: |
+        echo $ | helm registry login bcglabacr01.azurecr.io --username bcglabacr01 --password vQign8/X5HO3XhfXFWFW05CtHqpYV+dM
+
+    - name : Set Helm Env Var
+      run : export HELM_EXPERIMENTAL_OCI=1  
+      
+    - name: Helm Chart Pull
+      run: helm chart pull bcglabacr01.azurecr.io/navid:latest
+
+    - name: Helm Chart Move
+      run: helm chart export bcglabacr01.azurecr.io/navid:latest --destination ./install
+
+    - name: Helm Chart Install
+      run: helm upgrade --namespace ns-qa --install --set image.tag=latest actiondemo01-api ./install/navid # release name chart name
