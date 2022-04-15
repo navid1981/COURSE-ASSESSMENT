@@ -30,7 +30,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
-          - name: TestKey
+          - name: name
             valueFrom:
               secretKeyRef:
                 name: envkeys
