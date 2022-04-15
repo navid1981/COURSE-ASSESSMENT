@@ -2,7 +2,6 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  namespace: ns-navid
   name: {{ include "navid.fullname" . }}
   labels:
     {{- include "navid.labels" . | nindent 4 }}
