@@ -26,7 +26,7 @@ jobs:
         # Container registry username
         username: bcglabacr01
         # Container registry password
-        password: vQign8/X5HO3XhfXFWFW05CtHqpYV+dM 
+        password: vQign8/X5HO3XhfXFWFW05CtHqpYV+dM
         # Container registry server url
         login-server: a
         
