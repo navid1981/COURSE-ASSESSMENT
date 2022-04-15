@@ -26,9 +26,9 @@ jobs:
         # Container registry username
         username: bcglabacr01
         # Container registry password
-        password: V4zbo+bG7pmzFrUBff+NhhryBEkDsKAL
+        password: vQign8/X5HO3XhfXFWFW05CtHqpYV+dM
         # Container registry server url
-        login-server: a
+        login-server: bcglabacr01.azurecr.io
         
     - name: Push Image  
       run: docker push bcglabacr01.azurecr.io/navidcourse:latest
